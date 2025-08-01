@@ -1,12 +1,14 @@
 package br.com.duxusdesafio.service;
 
 import br.com.duxusdesafio.model.Integrante;
+import br.com.duxusdesafio.model.ComposicaoTime;
 import br.com.duxusdesafio.model.Time;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.*;
 
 
@@ -42,6 +44,9 @@ public class ApiService {
         if(todosOsTimes == null || todosOsTimes.isEmpty()){
             return null;
         }
+
+        List<Time> timesNasDatas;
+
         if(dataInicial == null || dataFinal == null){
             List<Time> timeNasDatas = todosOsTimes;
         } else {
@@ -54,7 +59,7 @@ public class ApiService {
 
         for(Time time : timesNasDatas){
             for (ComposicaoTime compTime : time.composicaoTime) {
-                contagemIntegrantes.put(compTime.getIntegrante(), contagemIntegrantes.getorDefault(compTime.getIntegrante(), 0) + 1);
+                contagemIntegrantes.put(compTime.getIntegrante(), contagemIntegrantes.getOrDefault(compTime.getIntegrante(), 0) + 1);
             }
         }
 
@@ -78,6 +83,9 @@ public class ApiService {
         if(todosOsTimes == null || todosOsTimes.isEmpty()){
             return null;
         }
+
+        List<Time> timesNasDatas;
+
         if(dataInicial == null || dataFinal == null){
             List<Time> timeNasDatas = todosOsTimes;
         } else {
@@ -117,6 +125,9 @@ public class ApiService {
         if(todosOsTimes == null || todosOsTimes.isEmpty()){
             return null;
         }
+
+        List<Time> timesNasDatas;
+
         if(dataInicial == null || dataFinal == null){
             List<Time> timeNasDatas = todosOsTimes;
         } else {
@@ -129,7 +140,7 @@ public class ApiService {
 
         for(Time time : timesNasDatas){
             for (ComposicaoTime compTime : time.composicaoTime) {
-                contagemFuncoes.put(compTime.getIntegrante().funcao, contagemFuncoes.getorDefault(compTime.getIntegrante().funcao, 0) + 1);
+                contagemFuncoes.put(compTime.getIntegrante().funcao, contagemFuncoes.getOrDefault(compTime.getIntegrante().funcao, 0) + 1);
             }
         }
 
@@ -154,6 +165,9 @@ public class ApiService {
         if(todosOsTimes == null || todosOsTimes.isEmpty()){
             return null;
         }
+
+        List<Time> timesNasDatas;
+
         if(dataInicial == null || dataFinal == null){
             List<Time> timeNasDatas = todosOsTimes;
         } else {
@@ -166,7 +180,7 @@ public class ApiService {
 
         for(Time time : timesNasDatas){
             for (ComposicaoTime compTime : time.composicaoTime) {
-                contagemFranquias.put(compTime.getIntegrante().franquia, contagemFranquias.getorDefault(compTime.getIntegrante().franquia, 0) + 1);
+                contagemFranquias.put(compTime.getIntegrante().franquia, contagemFranquias.getOrDefault(compTime.getIntegrante().franquia, 0) + 1);
             }
         }
 
@@ -187,10 +201,13 @@ public class ApiService {
     /**
      * Vai retornar o número (quantidade) de Franquias dentro do período
      */
-    public Map<String, Long> contagemPorFranquia(LocalDate dataInicial, LocalDate dataFinal, List<Time> todosOsTimes){
+    public Map<String, Integer> contagemPorFranquia(LocalDate dataInicial, LocalDate dataFinal, List<Time> todosOsTimes){
         if(todosOsTimes == null || todosOsTimes.isEmpty()){
             return null;
         }
+
+        List<Time> timesNasDatas;
+
         if(dataInicial == null || dataFinal == null){
             List<Time> timeNasDatas = todosOsTimes;
         } else {
@@ -203,7 +220,7 @@ public class ApiService {
 
         for(Time time : timesNasDatas){
             for (ComposicaoTime compTime : time.composicaoTime) {
-                contagemFranquias.put(compTime.getIntegrante().franquia, contagemFranquias.getorDefault(compTime.getIntegrante().franquia, 0) + 1);
+                contagemFranquias.put(compTime.getIntegrante().franquia, contagemFranquias.getOrDefault(compTime.getIntegrante().franquia, 0) + 1);
             }
         }
 
@@ -213,10 +230,13 @@ public class ApiService {
     /**
      * Vai retornar o número (quantidade) de Funções dentro do período
      */
-    public Map<String, Long> contagemPorFuncao(LocalDate dataInicial, LocalDate dataFinal, List<Time> todosOsTimes){
+    public Map<String, Integer> contagemPorFuncao(LocalDate dataInicial, LocalDate dataFinal, List<Time> todosOsTimes){
         if(todosOsTimes == null || todosOsTimes.isEmpty()){
             return null;
         }
+
+        List<Time> timesNasDatas;
+
         if(dataInicial == null || dataFinal == null){
             List<Time> timeNasDatas = todosOsTimes;
         } else {
@@ -229,7 +249,7 @@ public class ApiService {
 
         for(Time time : timesNasDatas){
             for (ComposicaoTime compTime : time.composicaoTime) {
-                contagemFuncoes.put(compTime.getIntegrante().funcao, contagemFuncoes.getorDefault(compTime.getIntegrante().funcao, 0) + 1);
+                contagemFuncoes.put(compTime.getIntegrante().funcao, contagemFuncoes.getOrDefault(compTime.getIntegrante().funcao, 0) + 1);
             }
         }
 
@@ -239,6 +259,16 @@ public class ApiService {
 }
 
 /*
+
 Em algumas funções eu reutilizaria outras funções, como contagemPorFranquia em franquiaMaisFamosa,
 mas como fiz na ordem, deixarei assim para mostrar a linha de raciocínio
+
+
+Também eu criaria um método para achar time dentro de um intervalo entre datas, mas preferi não
+mexer no escopo da service
+
+
+Tomei a liberdade apenas de fazer uma alteração no escopo dos 2 últimos métodos, já que estamos usando contagem, achei
+mais válido retornar map<string, int> do que map<string, long>
+
 */
