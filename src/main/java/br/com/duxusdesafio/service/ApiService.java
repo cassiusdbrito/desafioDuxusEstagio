@@ -26,6 +26,9 @@ public class ApiService {
      * Vai retornar um Time, com a composição do time daquela data
      */
     public Time timeDaData(LocalDate data, List<Time> todosOsTimes){
+        if(data == null || todosOsTimes == null || todosOsTimes.isEmpty()){
+            return null;
+        }
         return todosOsTimes.stream()
                 .filter(t -> t.getData().equals(data))
                 .findFirst();
@@ -36,9 +39,16 @@ public class ApiService {
      * dentro do período
      */
     public Integrante integranteMaisUsado(LocalDate dataInicial, LocalDate dataFinal, List<Time> todosOsTimes){
-        List<Time> timesNasDatas = todosOsTimes.stream()
-                .filter(t -> t.getData().isAfter(dataInicial) && t.getData().isBefore(dataFinal))
-                .collect(Collector.toList());
+        if(todosOsTimes == null || todosOsTimes.isEmpty()){
+            return null;
+        }
+        if(dataInicial == null || dataFinal == null){
+            List<Time> timeNasDatas = todosOsTimes;
+        } else {
+            List<Time> timesNasDatas = todosOsTimes.stream()
+                    .filter(t -> t.getData().isAfter(dataInicial) && t.getData().isBefore(dataFinal))
+                    .collect(Collector.toList());
+        }
 
         Map<Integrante, Integer>contagemIntegrantes = new HashMap<>();
 
@@ -65,9 +75,16 @@ public class ApiService {
      * dentro do período
      */
     public List<String> integrantesDoTimeMaisComum(LocalDate dataInicial, LocalDate dataFinal, List<Time> todosOsTimes){
-        List<Time> timesNasDatas = todosOsTimes.stream()
-                .filter(t -> t.getData().isAfter(dataInicial) && t.getData().isBefore(dataFinal))
-                .collect(Collector.toList());
+        if(todosOsTimes == null || todosOsTimes.isEmpty()){
+            return null;
+        }
+        if(dataInicial == null || dataFinal == null){
+            List<Time> timeNasDatas = todosOsTimes;
+        } else {
+            List<Time> timesNasDatas = todosOsTimes.stream()
+                    .filter(t -> t.getData().isAfter(dataInicial) && t.getData().isBefore(dataFinal))
+                    .collect(Collector.toList());
+        }
 
         Map<Time, Integer>contagemTimes = new HashMap<>();
 
@@ -97,9 +114,16 @@ public class ApiService {
      * Vai retornar a função mais comum nos times dentro do período
      */
     public String funcaoMaisComum(LocalDate dataInicial, LocalDate dataFinal, List<Time> todosOsTimes){
-        List<Time> timesNasDatas = todosOsTimes.stream()
-                .filter(t -> t.getData().isAfter(dataInicial) && t.getData().isBefore(dataFinal))
-                .collect(Collector.toList());
+        if(todosOsTimes == null || todosOsTimes.isEmpty()){
+            return null;
+        }
+        if(dataInicial == null || dataFinal == null){
+            List<Time> timeNasDatas = todosOsTimes;
+        } else {
+            List<Time> timesNasDatas = todosOsTimes.stream()
+                    .filter(t -> t.getData().isAfter(dataInicial) && t.getData().isBefore(dataFinal))
+                    .collect(Collector.toList());
+        }
 
         Map<String, Integer>contagemFuncoes = new HashMap<>();
 
@@ -127,9 +151,16 @@ public class ApiService {
      * Vai retornar o nome da Franquia mais comum nos times dentro do período
      */
     public String franquiaMaisFamosa(LocalDate dataInicial, LocalDate dataFinal, List<Time> todosOsTimes) {
-        List<Time> timesNasDatas = todosOsTimes.stream()
-                .filter(t -> t.getData().isAfter(dataInicial) && t.getData().isBefore(dataFinal))
-                .collect(Collector.toList());
+        if(todosOsTimes == null || todosOsTimes.isEmpty()){
+            return null;
+        }
+        if(dataInicial == null || dataFinal == null){
+            List<Time> timeNasDatas = todosOsTimes;
+        } else {
+            List<Time> timesNasDatas = todosOsTimes.stream()
+                    .filter(t -> t.getData().isAfter(dataInicial) && t.getData().isBefore(dataFinal))
+                    .collect(Collector.toList());
+        }
 
         Map<String, Integer>contagemFranquias = new HashMap<>();
 
@@ -157,9 +188,16 @@ public class ApiService {
      * Vai retornar o número (quantidade) de Franquias dentro do período
      */
     public Map<String, Long> contagemPorFranquia(LocalDate dataInicial, LocalDate dataFinal, List<Time> todosOsTimes){
-        List<Time> timesNasDatas = todosOsTimes.stream()
-                .filter(t -> t.getData().isAfter(dataInicial) && t.getData().isBefore(dataFinal))
-                .collect(Collector.toList());
+        if(todosOsTimes == null || todosOsTimes.isEmpty()){
+            return null;
+        }
+        if(dataInicial == null || dataFinal == null){
+            List<Time> timeNasDatas = todosOsTimes;
+        } else {
+            List<Time> timesNasDatas = todosOsTimes.stream()
+                    .filter(t -> t.getData().isAfter(dataInicial) && t.getData().isBefore(dataFinal))
+                    .collect(Collector.toList());
+        };
 
         Map<String, Integer>contagemFranquias = new HashMap<>();
 
@@ -176,9 +214,16 @@ public class ApiService {
      * Vai retornar o número (quantidade) de Funções dentro do período
      */
     public Map<String, Long> contagemPorFuncao(LocalDate dataInicial, LocalDate dataFinal, List<Time> todosOsTimes){
-        List<Time> timesNasDatas = todosOsTimes.stream()
-                .filter(t -> t.getData().isAfter(dataInicial) && t.getData().isBefore(dataFinal))
-                .collect(Collector.toList());
+        if(todosOsTimes == null || todosOsTimes.isEmpty()){
+            return null;
+        }
+        if(dataInicial == null || dataFinal == null){
+            List<Time> timeNasDatas = todosOsTimes;
+        } else {
+            List<Time> timesNasDatas = todosOsTimes.stream()
+                    .filter(t -> t.getData().isAfter(dataInicial) && t.getData().isBefore(dataFinal))
+                    .collect(Collector.toList());
+        }
 
         Map<String, Integer>contagemFuncoes = new HashMap<>();
 
